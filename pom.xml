@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>com.acme.banking</groupId>
-	<artifactId>dbo</artifactId>
+	<artifactId>spring-core-for-qa</artifactId>
 	<version>1.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
