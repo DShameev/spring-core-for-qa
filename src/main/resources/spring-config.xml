@@ -15,33 +15,33 @@
     <context:component-scan base-package="com.acme.banking.dbo.spring"/>
     <context:annotation-config/>
 
-    <jpa:repositories base-package="com.acme.banking.dbo.spring.dao"/>
-    <tx:annotation-driven/>
+    <!--<jpa:repositories base-package="com.acme.banking.dbo.spring.dao"/>-->
+    <!--<tx:annotation-driven/>-->
 
-    <!-- TODO Spring Boot for Spring auto-configurated context with modules -->
-    <beans:bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" depends-on="dataSource">
-        <beans:property name="packagesToScan" value="com.acme.banking.dbo.spring.domain"/>
-        <beans:property name="dataSource" ref="dataSource"/> <!-- TODO Spring profile configurations -->
-        <beans:property name="jpaVendorAdapter">
-            <beans:bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
-                <beans:property name="generateDdl" value="true"/>
-                <beans:property name="showSql" value="true"/>
-            </beans:bean>
-        </beans:property>
-        <beans:property name="jpaProperties">
-            <beans:props>
-                <beans:prop key="hibernate.hbm2ddl.auto">validate</beans:prop>
-                <beans:prop key="hibernate.dialect">org.hibernate.dialect.DerbyDialect</beans:prop>
-            </beans:props>
-        </beans:property>
-    </beans:bean>
+    <!--&lt;!&ndash; TODO Spring Boot for Spring auto-configurated context with modules &ndash;&gt;-->
+    <!--<beans:bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean" depends-on="dataSource">-->
+        <!--<beans:property name="packagesToScan" value="com.acme.banking.dbo.spring.domain"/>-->
+        <!--<beans:property name="dataSource" ref="dataSource"/> &lt;!&ndash; TODO Spring profile configurations &ndash;&gt;-->
+        <!--<beans:property name="jpaVendorAdapter">-->
+            <!--<beans:bean class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">-->
+                <!--<beans:property name="generateDdl" value="true"/>-->
+                <!--<beans:property name="showSql" value="true"/>-->
+            <!--</beans:bean>-->
+        <!--</beans:property>-->
+        <!--<beans:property name="jpaProperties">-->
+            <!--<beans:props>-->
+                <!--<beans:prop key="hibernate.hbm2ddl.auto">validate</beans:prop>-->
+                <!--<beans:prop key="hibernate.dialect">org.hibernate.dialect.DerbyDialect</beans:prop>-->
+            <!--</beans:props>-->
+        <!--</beans:property>-->
+    <!--</beans:bean>-->
 
-    <beans:bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
-        <beans:property name="entityManagerFactory" ref="entityManagerFactory"/>
-    </beans:bean>
+    <!--<beans:bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">-->
+        <!--<beans:property name="entityManagerFactory" ref="entityManagerFactory"/>-->
+    <!--</beans:bean>-->
 
-    <!-- TODO Validator Framework -->
-    <beans:bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>
+    <!--&lt;!&ndash; TODO Validator Framework &ndash;&gt;-->
+    <!--<beans:bean id="validator" class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean"/>-->
 
     <beans:bean id="logger" scope="prototype" class="org.slf4j.LoggerFactory" factory-method="getLogger">
         <beans:constructor-arg name="name" value="logger" />
