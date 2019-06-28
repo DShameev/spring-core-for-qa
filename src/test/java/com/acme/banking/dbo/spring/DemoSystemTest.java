@@ -3,6 +3,7 @@ package com.acme.banking.dbo.spring;
 import com.acme.banking.dbo.spring.dao.AccountRepository;
 import com.acme.banking.dbo.spring.domain.CheckingAccount;
 import com.acme.banking.dbo.spring.service.ReportingService;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import static org.fest.assertions.api.Assertions.assertThat;
 @ActiveProfiles({"test","system-test"})
 @TestPropertySource("classpath:application.properties")
 @Transactional
+@Ignore
 public class DemoSystemTest {
     @Autowired private ReportingService reportingService;
     @Autowired private AccountRepository accountRepository;
