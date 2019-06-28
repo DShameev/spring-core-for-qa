@@ -8,35 +8,41 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.annotation.Resource;
 
-@Service //TODO @Component semantics
-@Scope("singleton") //TODO Scope semantics
-@Lazy(false) //TODO Lazy semantics
-@PropertySource("classpath:application.properties") //TODO application.properties semantics
+@Component //this will create a bean with default name reportingService , or you can specify it as @Component('name')
+@Service //Pseudonym over Component, for more clarity. There is also @repository and @controller
+@Scope("singleton") //Same as in Spring, max clarity. Not really required for Singleton, as it's default
+@Lazy(false) //Again, same as in Spring. Again, defaulted
+@PropertySource("classpath:application.properties") //Basically makes properties object and makes @Value annotation
+// below to essentially be properties.getProperty(marker)
 public class ReportingService {
-    /** TODO Refer xml config for bean declaration */
+    /** Basically "getBean(Logger.class) and assign it to this field". If there are 2+ such classes,
+     * the one with @Primary is chosen. Or you can use @Qualifier field annotation. But those both are anti-patterns.
+     * The only way it can be justified is when beans are oly data-different */
     @Autowired private Logger logger;
 
     /** TODO Field VS constructor VS setter injection*/
     @Value("${marker}") private String layoutMarker; //TODO SpEL
-    /** TODO @Autowired VS @Inject VS @Resource */
+    /** Absolutely the same as @Autowired, but supported by Java instead of Spring. There is also @Inject. Note, that you will STILL need to use Spring for context init */
     @Resource private AccountRepository accounts;
 
     public void setLayoutMarker(String layoutMarker) {
         this.layoutMarker = layoutMarker;
     }
-
+/** this allows to create RepService instance without Spring. Constructor is used OVER field annotations,
+ *  so basically we don't need @Resource on accounts*/
     @Autowired
     public ReportingService(AccountRepository accounts) {
         this.accounts = accounts;
     }
 
-    @PostConstruct //TODO Lifecycle semantics
+    @PostConstruct //This is not Spring one, but here java won and there's one commonly used annotation only
     public void onCreate() {
         logger.info("ReportingService created");
     }
